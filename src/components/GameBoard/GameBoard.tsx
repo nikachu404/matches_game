@@ -53,34 +53,40 @@ export const GameBoard: React.FC<Props> = ({
           </div>
         </div>
 
-        <div className="game-board__stick-container">
-          <div className="game-board__stick-wrapper">{stickElements}</div>
-        </div>
+        {!isGameOver && (
+          <>
+            <div className="game-board__stick-container">
+              <div className="game-board__stick-wrapper">{stickElements}</div>
+            </div>
 
-        <div className="game-board__info">
-          <h2>{isPlayerTurn ? 'Your Turn!' : "Opponent's Turn..."}</h2>
-          <h2>Matches: {matches}</h2>
-        </div>
+            <div className="game-board__info">
+              <h2>{isPlayerTurn ? 'Your Turn!' : "Opponent's Turn..."}</h2>
+              <h2>Matches: {matches}</h2>
+            </div>
 
-        <p>Selected Matches: {selectedMatches}</p>
+            <p>Selected Matches: {selectedMatches}</p>
 
-        <input
-          type="range"
-          min="1"
-          max={matchesPerTurn}
-          value={selectedMatches}
-          onChange={handleSliderChange}
-          disabled={!isPlayerTurn}
-        />
+            <input
+              type="range"
+              min="1"
+              max={matchesPerTurn}
+              value={selectedMatches}
+              onChange={handleSliderChange}
+              disabled={!isPlayerTurn}
+            />
+          </>
+        )}
 
         <div className="game-board__buttons">
-          <button
-            onClick={handleTakeMatches}
-            disabled={!isPlayerTurn}
-            className="game-board__btn game-board__btn--take"
-          >
-            Take Matches!
-          </button>
+          {!isGameOver && (
+            <button
+              onClick={handleTakeMatches}
+              disabled={!isPlayerTurn}
+              className="game-board__btn game-board__btn--take"
+            >
+              Take Matches!
+            </button>
+          )}
 
           <div className="game-board__secondary-buttons">
             <button
@@ -97,7 +103,9 @@ export const GameBoard: React.FC<Props> = ({
         </div>
 
         {isGameOver && (
-          <p>{playerMatches % 2 === 0 ? 'You won!' : 'You lost ;('}</p>
+          <p className="game-board__result">
+            {playerMatches % 2 === 0 ? 'You won!' : 'You lost ;('}
+          </p>
         )}
       </div>
     </div>
