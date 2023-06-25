@@ -1,0 +1,50 @@
+.opponent-player {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  width: 20%;
+  padding: 36px 28px 76px;
+
+  background-color: #090909;
+  color: #fefefe;
+
+  @media (max-width: 768px) {
+    width: 51%;
+    padding: 10px;
+    bottom: auto;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__emoji {
+    font-size: 100px;
+
+    @media (max-width: 768px) {
+      font-size: 50px;
+    }
+  }
+
+  &__name {
+    height: 80px;
+  }
+
+  &__matches-container {
+    width: 100%;
+    padding: 30px;
+    font-size: 40px;
+    text-align: center;
+    border-radius: 10px;
+    color: #090909;
+    background-color: #fefefe;
+
+    @media (max-width: 768px) {
+      padding: 5px;
+    }
+  }
+}
