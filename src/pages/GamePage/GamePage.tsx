@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import { useAppSelector } from '../../redux/hooks';
 import { GameBoard, OpponentPlayer, Player } from '../../components';
 import {
@@ -43,6 +44,10 @@ export const GamePage: React.FC = () => {
         isPlayerTurn: false,
         selectedMatches: 1,
       }));
+    }
+
+    if (selectedMatches > gameMatches) {
+      toast.error('You can\'t take so many matches');
     }
   };
 
