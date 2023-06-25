@@ -33,7 +33,7 @@ export const GamePage: React.FC = () => {
   const handleTakeMatches = () => {
     const { isPlayerTurn, selectedMatches, playerMatches } = gameState;
 
-    if (!gameState.isGameOver && isPlayerTurn && selectedMatches <= matches) {
+    if (!gameState.isGameOver && isPlayerTurn && selectedMatches <= gameMatches) {
       const remainingMatches = gameMatches - selectedMatches;
       setGameMatches(remainingMatches >= 0 ? remainingMatches : 0);
 
