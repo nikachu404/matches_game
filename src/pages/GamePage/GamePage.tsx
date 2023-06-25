@@ -53,14 +53,10 @@ export const GamePage: React.FC = () => {
 
     if (matches % 2 !== 0) {
       if (aiPlayerMatches % 2 === 0) {
-        // Якщо на дошці залишиться непарна кількість сірників, а у AI гравця залишиться парна кількість сірників,
-        // то AI вибирає кількість сірників таким чином, щоб залишити парну кількість сірників в aiPlayerMatches.
         const possibleMatches = Math.min(matchesPerTurn, matches);
         aiMatches =
           possibleMatches % 2 === 0 ? possibleMatches : possibleMatches - 1;
       } else {
-        // Якщо на дошці залишиться непарна кількість сірників, а у AI гравця залишиться непарна кількість сірників,
-        // то AI вибирає лише один сірник.
         aiMatches = Math.min(1, matches);
       }
     } else {
