@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import cn from 'classnames';
 import './game-board.scss';
 
 type Props = {
@@ -82,7 +83,9 @@ export const GameBoard: React.FC<Props> = ({
             <button
               onClick={handleTakeMatches}
               disabled={!isPlayerTurn}
-              className="game-board__btn game-board__btn--take"
+              className={cn('game-board__btn game-board__btn--take', {
+                'game-board__btn--disabled': !isPlayerTurn,
+              })}
             >
               Take Matches!
             </button>

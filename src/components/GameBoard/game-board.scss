@@ -156,6 +156,10 @@
         perspective: 1000px;
       }
     }
+
+    &--disabled {
+      cursor: not-allowed;
+    }
   }
 
   &__settings {
