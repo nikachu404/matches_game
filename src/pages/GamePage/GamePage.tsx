@@ -34,7 +34,11 @@ export const GamePage: React.FC = () => {
   const handleTakeMatches = () => {
     const { isPlayerTurn, selectedMatches, playerMatches } = gameState;
 
-    if (!gameState.isGameOver && isPlayerTurn && selectedMatches <= gameMatches) {
+    if (
+      !gameState.isGameOver &&
+      isPlayerTurn &&
+      selectedMatches <= gameMatches
+    ) {
       const remainingMatches = gameMatches - selectedMatches;
       setGameMatches(remainingMatches >= 0 ? remainingMatches : 0);
 
@@ -47,7 +51,7 @@ export const GamePage: React.FC = () => {
     }
 
     if (selectedMatches > gameMatches) {
-      toast.error('You can\'t take so many matches');
+      toast.error("You can't take so many matches");
     }
   };
 
