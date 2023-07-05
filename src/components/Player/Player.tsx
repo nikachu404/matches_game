@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import './player.scss';
 
 type Props = {
@@ -7,28 +7,26 @@ type Props = {
   playerMatches: number;
 };
 
-export const Player: React.FC<Props> = ({
-  isGameOver,
-  isPlayerTurn,
-  playerMatches,
-}) => {
-  const emoji = isGameOver
-    ? playerMatches % 2 === 0
-      ? '🤗'
-      : '😔'
-    : isPlayerTurn
-    ? '🤔'
-    : '😬';
+export const Player: React.FC<Props> = memo(
+  ({ isGameOver, isPlayerTurn, playerMatches }) => {
+    const emoji = isGameOver
+      ? playerMatches % 2 === 0
+        ? '🤗'
+        : '😔'
+      : isPlayerTurn
+      ? '🤔'
+      : '😬';
 
-  return (
-    <div className="player">
-      <div className="player__container">
-        <div className="player__emoji">{emoji}</div>
-        <div className="player__name">
-          <p>Your Matches: </p>
+    return (
+      <div className="player">
+        <div className="player__container">
+          <div className="player__emoji">{emoji}</div>
+          <div className="player__name">
+            <p>Your Matches: </p>
+          </div>
+          <div className="player__matches-container">{playerMatches}</div>
         </div>
-        <div className="player__matches-container">{playerMatches}</div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+);
