@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { useAppSelector } from '../../redux/hooks';
 import { GameBoard, OpponentPlayer, Player } from '../../components';
@@ -31,7 +31,7 @@ export const GamePage: React.FC = () => {
     selectedMatches: 1,
   });
 
-  const handleTakeMatches = () => {
+  const handleTakeMatches = useCallback(() => {
     const { isPlayerTurn, selectedMatches, playerMatches } = gameState;
 
     if (
@@ -53,7 +53,7 @@ export const GamePage: React.FC = () => {
     if (selectedMatches > gameMatches) {
       toast.error("You can't take so many matches");
     }
-  };
+  }, [gameState, gameMatches]);
 
   const makeAITurn = () => {
     const { aiPlayerMatches } = gameState;
@@ -82,7 +82,7 @@ export const GamePage: React.FC = () => {
     }));
   };
 
-  const handleRestart = () => {
+  const handleRestart = useCallback(() => {
     const initialGameState: GameState = {
       isPlayerTurn: isPlayerTurnFirst,
       isGameOver: false,
@@ -93,7 +93,15 @@ export const GamePage: React.FC = () => {
 
     setGameState(initialGameState);
     setGameMatches(matches);
-  };
+  }, [isPlayerTurnFirst, matches]);
+
+  const handleSliderChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const selectedMatches = Number(event.target.value);
+      setGameState((prevState) => ({ ...prevState, selectedMatches }));
+    },
+    []
+  );
 
   useEffect(() => {
     const { isPlayerTurn, isGameOver: gameOver } = gameState;
@@ -122,11 +130,6 @@ export const GamePage: React.FC = () => {
   useEffect(() => {
     setGameMatches(matches);
   }, [matches]);
-
-  const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedMatches = Number(event.target.value);
-    setGameState((prevState) => ({ ...prevState, selectedMatches }));
-  };
 
   const {
     isPlayerTurn,
